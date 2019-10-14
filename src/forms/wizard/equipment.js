@@ -7,13 +7,12 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddEquipment: equipment => dispatch(addEquipment(equipment)),
 });
 
-const EquipmentForm = ({ dispatchAddEquipment, transition }) => {
+const EquipmentForm = ({ dispatchAddEquipment }) => {
   const [input, setInput] = useState('');
   const handleSelect = e => setInput(e.target.value)
   const handleSubmit = e => {
     e.preventDefault();
     dispatchAddEquipment(input);
-    transition({ type: input });
   }
 
   return (

@@ -6,13 +6,12 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddTime: time => dispatch(addTime(time)),
 });
 
-const TimeForm = ({ dispatchAddTime, transition }) => {
+const TimeForm = ({ dispatchAddTime }) => {
   const [input, setInput] = useState('');
   const handleChange = e => setInput(e.target.value)
   const handleSubmit = e => {
     e.preventDefault();
     dispatchAddTime(input);
-    transition({ type: 'INPUT', time: input });
   }
 
   return (

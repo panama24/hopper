@@ -6,13 +6,12 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddMovement: movement => dispatch(addMovement(movement)),
 });
 
-const MovementTypeForm = ({ dispatchAddMovement, transition }) => {
+const MovementTypeForm = ({ dispatchAddMovement }) => {
   const [input, setInput] = useState('');
   const handleSelect = e => setInput(e.target.value)
   const handleSubmit = e => {
     e.preventDefault();
     dispatchAddMovement(input);
-    transition({ type: 'TYPE', payload: input });
   }
 
   return (

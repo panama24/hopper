@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 
@@ -8,86 +8,37 @@ import FitnessLevelForm from './forms/wizard/level';
 import MovementTypeForm from './forms/wizard/movement';
 import TrainingTypeForm from './forms/wizard/training';
 
-const mapStateToProps = state => {
-  console.log('STATE:', state)
-  return state;
-};
-
-const initialState = 'equipment';
-const wizardStateMachine = {
-  time: {
-    INPUT: 'equipment',
-  },
-  equipment: {
-    DUMBBELL: 'trainingType',
-    BARBELL: 'trainingType',
-    KETTLEBELL: 'trainingType',
-    NONE: 'bodyweightMovementType',
-  },
-  bodyweightMovementType: {
-    TYPE: 'trainingType',
-  },
-  trainingType: {
-    TYPE: 'fitnessLevel',
-  },
-  fitnessLevel: {
-    LEVEL: 'createWorkout',
-  },
+const mapStateToProps = (state) => {
+  return {
+    wizard: state.wizard
+  };
 };
 
 const App = (props) => {
-  const [wizardState, setWizardState] = useState(initialState);
-  const [userData, setUserData] = useState({});
-
-  const command = (nextState, action) => {
-    switch (nextState) {
-      case 'equipment':
-        return 'equipment';
-      case 'bodyweightMovementType':
-        return 'bodyweightMovementType';
-      case 'trainingType':
-        return 'trainingType';
-      case 'fitnessLevel':
-        return 'fitnessLevel';
-      default:
-        break;
-    }
-  }
-
-  const transition = action => {
-    const currentWizardState = wizardState;
-    const nextWizardState = wizardStateMachine[currentWizardState][action.type];
-
-    if (nextWizardState) {
-      const nextState = command(nextWizardState, action);
-      setWizardState(nextState);
-    }
-  };
-
-  const renderWizard = state => {
-    if (state === 'time') {
+  const renderWizard = step => {
+    if (step === 'time') {
       return (
-        <TimeForm transition={transition} />
+        <TimeForm />
       )
     }
-    if (state === 'equipment') {
+    if (step === 'equipment') {
       return (
-        <EquipmentForm transition={transition} />
+        <EquipmentForm />
       )
     }
-    if (state === 'bodyweightMovementType') {
+    if (step === 'bodyweightMovementType') {
       return (
-        <MovementTypeForm transition={transition} />
+        <MovementTypeForm />
       )
     }
-    if (state === 'trainingType') {
+    if (step === 'trainingType') {
       return (
-        <TrainingTypeForm transition={transition} />
+        <TrainingTypeForm />
       )
     }
 
-    if (state === 'fitnessLevel') {
-      return <FitnessLevelForm transition={transition} />
+    if (step === 'fitnessLevel') {
+      return <FitnessLevelForm />
     }
     return (
       <div>NO MORE FORMS</div>
@@ -95,9 +46,10 @@ const App = (props) => {
   }
 
   console.log(props)
+  const { wizard: { currentStep } } = props;
   return (
     <div className="App">
-      {renderWizard(wizardState)}
+      {renderWizard(currentStep)}
     </div>
   );
 }

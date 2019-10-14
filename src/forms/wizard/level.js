@@ -6,13 +6,12 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddLevel: level => dispatch(addLevel(level)),
 });
 
-const FitnessLevelForm = ({ dispatchAddLevel, transition }) => {
+const FitnessLevelForm = ({ dispatchAddLevel }) => {
   const [input, setInput] = useState('');
   const handleSelect = e => setInput(e.target.value)
   const handleSubmit = e => {
     e.preventDefault();
     dispatchAddLevel(input);
-    transition({ type: 'LEVEL', payload: input });
   }
 
   return (

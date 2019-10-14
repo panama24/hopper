@@ -1,13 +1,36 @@
 import { ADD_TIME, ADD_MOVEMENT, ADD_LEVEL, ADD_EQUIPMENT, ADD_TRAINING_TYPE } from '../constants/action-types';
 
 const initialState = {
-  wizardValues: {
-    time: 18,
-    equipment: null,
-    movement: null,
-    level: null,
-    trainingType: null,
-  },
+  wizard: {
+    currentStep: 'time',
+    values: {
+      time: null,
+      equipment: null,
+      movement: null,
+      level: null,
+      trainingType: null,
+    },
+    wizardState: {
+      ADD_TIME: {
+        NEXT: 'equipment',
+      },
+      ADD_EQUIPMENT: {
+        DUMBBELL: 'trainingType',
+        BARBELL: 'trainingType',
+        KETTLEBELL: 'trainingType',
+        NONE: 'bodyweightMovementType',
+      },
+      ADD_MOVEMENT: {
+        TYPE: 'trainingType',
+      },
+      ADD_TRAINING_TYPE: {
+        TYPE: 'fitnessLevel',
+      },
+      ADD_LEVEL: {
+        LEVEL: 'createWorkout',
+      },
+    },
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -15,41 +38,61 @@ const rootReducer = (state = initialState, action) => {
     case ADD_EQUIPMENT:
       return {
         ...state,
-        wizardValues: {
-          ...state.wizardValues,
-          equipment: action.payload,
+        wizard: {
+          ...state.wizard,
+          values: {
+            ...state.wizard.values,
+            equipment: action.payload,
+          },
+          currentStep: state.wizard.wizardState[action.type][action.payload],
         },
       };
     case ADD_MOVEMENT:
       return {
         ...state,
-        wizardValues: {
-          ...state.wizardValues,
-          movement: action.payload,
+        wizard: {
+          ...state.wizard,
+          values: {
+            ...state.wizard.values,
+            movement: action.payload,
+          },
+          currentStep: state.wizard.wizardState[action.type]['TYPE'],
         },
       };
     case ADD_LEVEL:
       return {
         ...state,
-        wizardValues: {
-          ...state.wizardValues,
-          level: action.payload,
+        wizard: {
+          ...state.wizard,
+          values: {
+            ...state.wizard.values,
+            level: action.payload,
+          },
+          currentStep: state.wizard.wizardState[action.type]['LEVEL'],
         },
       };
     case ADD_TIME:
       return {
         ...state,
-        wizardValues: {
-          ...state.wizardValues,
-          time: action.payload,
+        wizard: {
+          ...state.wizard,
+          values: {
+            ...state.wizard.values,
+            time: action.payload,
+          },
+          currentStep: state.wizard.wizardState[action.type]['NEXT']
         },
       };
     case ADD_TRAINING_TYPE:
       return {
         ...state,
-        wizardValues: {
-          ...state.wizardValues,
-          trainingType: action.payload,
+        wizard: {
+          ...state.wizard,
+          values: {
+            ...state.wizard.values,
+            trainingType: action.payload,
+          },
+          currentStep: state.wizard.wizardState[action.type]['TYPE']
         },
       };
     default:

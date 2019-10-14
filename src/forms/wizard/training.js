@@ -6,13 +6,12 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddTrainingType: type => dispatch(addTrainingType(type)),
 });
 
-const TrainingTypeForm = ({ dispatchAddTrainingType, transition }) => {
+const TrainingTypeForm = ({ dispatchAddTrainingType }) => {
   const [input, setInput] = useState('');
   const handleSelect = e => setInput(e.target.value)
   const handleSubmit = e => {
     e.preventDefault();
     dispatchAddTrainingType(input);
-    transition({ type: 'TYPE', payload: input });
   }
 
   return (
