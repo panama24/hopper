@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import './App.css';
 
 import TimeForm from './forms/wizard/time';
@@ -26,7 +27,7 @@ const App = (props) => {
         <EquipmentForm />
       )
     }
-    if (step === 'bodyweightMovementType') {
+    if (step === 'movement') {
       return (
         <MovementTypeForm />
       )
@@ -37,7 +38,7 @@ const App = (props) => {
       )
     }
 
-    if (step === 'fitnessLevel') {
+    if (step === 'level') {
       return <FitnessLevelForm />
     }
     return (
@@ -48,10 +49,32 @@ const App = (props) => {
   console.log(props)
   const { wizard: { currentStep } } = props;
   return (
-    <div className="App">
-      {renderWizard(currentStep)}
-    </div>
+    <Layout>
+      <FormWrapper>
+        {renderWizard(currentStep)}
+      </FormWrapper>
+    </Layout>
   );
 }
 
 export default connect(mapStateToProps, null)(App);
+const LIME = '#A4C639';
+const ORANGE = '#EA4335';
+const TURQUOISE = '#08e8de';
+
+const Layout = styled.div`
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const FormWrapper = styled.div`
+  background: black;
+  height: 364px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${LIME};
+`;

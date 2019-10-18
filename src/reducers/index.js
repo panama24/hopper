@@ -18,13 +18,13 @@ const initialState = {
         DUMBBELL: 'trainingType',
         BARBELL: 'trainingType',
         KETTLEBELL: 'trainingType',
-        NONE: 'bodyweightMovementType',
+        NONE: 'movement',
       },
       ADD_MOVEMENT: {
         TYPE: 'trainingType',
       },
       ADD_TRAINING_TYPE: {
-        TYPE: 'fitnessLevel',
+        TYPE: 'level',
       },
       ADD_LEVEL: {
         LEVEL: 'createWorkout',
