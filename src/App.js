@@ -15,46 +15,63 @@ const mapStateToProps = (state) => {
   };
 };
 
+const Back = () => (
+  <span>{'<'}</span>
+)
+
+const Forward = () => (
+  <span>{'>'}</span>
+)
+
 const App = (props) => {
   const renderWizard = step => {
-    if (step === 'time') {
-      return (
-        <TimeForm />
-      )
+    switch (step) {
+      case 'time':
+        return (
+          <TimeForm />
+        );
+      case 'movement':
+        return (
+          <MovementTypeForm />
+        );
+      case 'equipment':
+        return (
+          <EquipmentForm />
+        );
+      case 'trainingType':
+        return (
+          <TrainingTypeForm />
+        );
+      case 'level':
+        return (
+          <FitnessLevelForm />
+        );
+      default:
+        return (
+          <div>NO MORE FORMS</div>
+        )
     }
-    if (step === 'equipment') {
-      return (
-        <EquipmentForm />
-      )
-    }
-    if (step === 'movement') {
-      return (
-        <MovementTypeForm />
-      )
-    }
-    if (step === 'trainingType') {
-      return (
-        <TrainingTypeForm />
-      )
-    }
-
-    if (step === 'level') {
-      return <FitnessLevelForm />
-    }
-    return (
-      <div>NO MORE FORMS</div>
-    )
   }
 
-  console.log(props)
   const { wizard: { currentStep } } = props;
   return (
-    <div>
-      <div>
+    <Layout>
+      <Wrapper>
         {renderWizard(currentStep)}
-      </div>
-    </div>
+      </Wrapper>
+    </Layout>
   );
 }
 
 export default connect(mapStateToProps, null)(App);
+
+const Layout = styled.div`
+      border: 1px solid red;
+      display: flex;
+      justify-content: center;
+      padding: 12px;
+    `;
+
+const Wrapper = styled.div`
+      border: 1px solid blue;
+`;
