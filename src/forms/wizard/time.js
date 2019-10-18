@@ -19,22 +19,12 @@ const TimeForm = ({ dispatchAddTime }) => {
   }
 
   return (
-    <StyledForm onSubmit={e => handleSubmit(e)}>
-      <Input type='number' label='Enter a time domain' handleChange={handleChange} />
-      <Button copy='Submit' type='submit' />
-    </StyledForm>
+    <form onSubmit={e => handleSubmit(e)}>
+      <label>Enter a time domain</label>
+      <input type='number' onChange={handleChange} />
+      <button type='submit'>Submit</button>
+    </form>
   )
 }
 
 export default connect(null, mapDispatchToProps)(TimeForm);
-
-const LIME = '#A4C639';
-const ORANGE = '#EA4335';
-const TURQUOISE = '#08e8de';
-
-const StyledForm = styled.form`
-  border: 1px solid ${TURQUOISE};
-  border-radius: 3px;
-  display: flex;
-  align-items: flex-end;
-`;

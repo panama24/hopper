@@ -8,20 +8,76 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const EquipmentForm = ({ dispatchAddEquipment }) => {
-  const [input, setInput] = useState('');
-  const handleSelect = e => setInput(e.target.value)
+  const [checkedItems, setCheckedItems] = useState(new Map());
+  const handleChange = e => {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    setCheckedItems(checkedItems.set(item, isChecked));
+  }
   const handleSubmit = e => {
     e.preventDefault();
-    dispatchAddEquipment(input);
+    dispatchAddEquipment(Array.from(checkedItems.keys()));
   }
 
   return (
     <form onSubmit={e => handleSubmit(e)}>
-      <select onChange={handleSelect} value={input}>
-        <option value='DUMBBELL'>DUMBBELL</option>
-        <option value='BARBELL'>BARBELL</option>
-        <option value='NONE'>NONE</option>
-      </select>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            value="dumbbell"
+            name="dumbbell"
+            key="dumbbell"
+            onChange={e => handleChange(e)}
+            checked={checkedItems.get('dumbbell')}
+          />
+          Dumbbell
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="barbell"
+            name="barbell"
+            key="barbell"
+            onChange={e => handleChange(e)}
+            checked={checkedItems.get('barbell')}
+          />
+          Barbell
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="kettlebell"
+            name="kettlebell"
+            key="kettlebell"
+            onChange={e => handleChange(e)}
+            checked={checkedItems.get('kettlebell')}
+          />
+          Kettlebell
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="oddObject"
+            name="oddObject"
+            key="oddObject"
+            onChange={e => handleChange(e)}
+            checked={checkedItems.get('oddObject')}
+          />
+          Odd Object
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="none"
+            name="none"
+            key="none"
+            onChange={e => handleChange(e)}
+            checked={checkedItems.get('none')}
+          />
+          None
+        </label>
+      </div>
       <button type="submit">Submit</button>
     </form>
   )

@@ -49,32 +49,12 @@ const App = (props) => {
   console.log(props)
   const { wizard: { currentStep } } = props;
   return (
-    <Layout>
-      <FormWrapper>
+    <div>
+      <div>
         {renderWizard(currentStep)}
-      </FormWrapper>
-    </Layout>
+      </div>
+    </div>
   );
 }
 
 export default connect(mapStateToProps, null)(App);
-const LIME = '#A4C639';
-const ORANGE = '#EA4335';
-const TURQUOISE = '#08e8de';
-
-const Layout = styled.div`
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
-
-const FormWrapper = styled.div`
-  background: black;
-  height: 364px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${LIME};
-`;

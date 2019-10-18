@@ -15,10 +15,8 @@ const initialState = {
         NEXT: 'equipment',
       },
       ADD_EQUIPMENT: {
-        DUMBBELL: 'trainingType',
-        BARBELL: 'trainingType',
-        KETTLEBELL: 'trainingType',
-        NONE: 'movement',
+        WEIGHTED: 'trainingType',
+        BW: 'movement',
       },
       ADD_MOVEMENT: {
         TYPE: 'trainingType',
@@ -36,6 +34,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_EQUIPMENT:
+      const key = action.payload.includes(p => p === 'none') ? 'BW' : 'WEIGHTED';
       return {
         ...state,
         wizard: {
@@ -44,7 +43,7 @@ const rootReducer = (state = initialState, action) => {
             ...state.wizard.values,
             equipment: action.payload,
           },
-          currentStep: state.wizard.wizardState[action.type][action.payload],
+          currentStep: state.wizard.wizardState[action.type][key],
         },
       };
     case ADD_MOVEMENT:
