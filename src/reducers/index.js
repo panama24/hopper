@@ -1,8 +1,11 @@
-import { ADD_TIME, ADD_MOVEMENT, ADD_LEVEL, ADD_EQUIPMENT, ADD_TRAINING_TYPE } from '../constants/action-types';
+import { ADD_TIME, ADD_MOVEMENT, ADD_LEVEL, ADD_EQUIPMENT, ADD_TRAINING_TYPE, GO_BACK } from '../constants/action-types';
 
+const initialStep = 'time';
 const initialState = {
   wizard: {
-    currentStep: 'time',
+    currentStep: initialStep,
+    prevStep: null,
+    steps: [initialStep],
     values: {
       time: null,
       equipment: null,
@@ -32,9 +35,10 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
+  const prevStep = state.wizard.steps.length > 0 ? state.wizard.steps[state.wizard.steps.length - 1] : null;
   switch (action.type) {
     case ADD_EQUIPMENT:
-      const key = action.payload.includes(p => p === 'none') ? 'BW' : 'WEIGHTED';
+      const key = action.payload == 'none' ? 'BW' : 'WEIGHTED';
       return {
         ...state,
         wizard: {
@@ -44,6 +48,11 @@ const rootReducer = (state = initialState, action) => {
             equipment: action.payload,
           },
           currentStep: state.wizard.wizardState[action.type][key],
+          prevStep,
+          steps: [
+            ...state.wizard.steps,
+            state.wizard.wizardState[action.type][key],
+          ]
         },
       };
     case ADD_MOVEMENT:
@@ -56,6 +65,11 @@ const rootReducer = (state = initialState, action) => {
             movement: action.payload,
           },
           currentStep: state.wizard.wizardState[action.type]['TYPE'],
+          prevStep,
+          steps: [
+            ...state.wizard.steps,
+            state.wizard.wizardState[action.type]['TYPE'],
+          ]
         },
       };
     case ADD_LEVEL:
@@ -68,6 +82,11 @@ const rootReducer = (state = initialState, action) => {
             level: action.payload,
           },
           currentStep: state.wizard.wizardState[action.type]['LEVEL'],
+          prevStep,
+          steps: [
+            ...state.wizard.steps,
+            state.wizard.wizardState[action.type]['LEVEL'],
+          ]
         },
       };
     case ADD_TIME:
@@ -79,7 +98,12 @@ const rootReducer = (state = initialState, action) => {
             ...state.wizard.values,
             time: action.payload,
           },
-          currentStep: state.wizard.wizardState[action.type]['NEXT']
+          currentStep: state.wizard.wizardState[action.type]['NEXT'],
+          prevStep,
+          steps: [
+            ...state.wizard.steps,
+            state.wizard.wizardState[action.type]['NEXT'],
+          ]
         },
       };
     case ADD_TRAINING_TYPE:
@@ -91,7 +115,23 @@ const rootReducer = (state = initialState, action) => {
             ...state.wizard.values,
             trainingType: action.payload,
           },
-          currentStep: state.wizard.wizardState[action.type]['TYPE']
+          currentStep: state.wizard.wizardState[action.type]['TYPE'],
+          prevStep,
+          steps: [
+            ...state.wizard.steps,
+            state.wizard.wizardState[action.type]['TYPE'],
+          ]
+        },
+      };
+    case GO_BACK:
+      const back = state.wizard.steps.slice(0, state.wizard.steps.length - 1);
+      return {
+        ...state,
+        wizard: {
+          ...state.wizard,
+          currentStep: back[back.length - 1],
+          prevStep,
+          steps: back
         },
       };
     default:

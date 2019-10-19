@@ -10,9 +10,6 @@ const Button = ({ copy, type }) => (
 export default Button;
 
 const LIME = '#A4C639';
-const ORANGE = '#EA4335';
-const TURQUOISE = '#08e8de';
-
 const Wrapper = styled.div`
   height: 42px;
   width: 100px;
