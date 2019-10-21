@@ -38,7 +38,7 @@ const rootReducer = (state = initialState, action) => {
   const prevStep = state.wizard.steps.length > 0 ? state.wizard.steps[state.wizard.steps.length - 1] : null;
   switch (action.type) {
     case ADD_EQUIPMENT:
-      const key = action.payload == 'none' ? 'BW' : 'WEIGHTED';
+      const key = action.payload === 'none' ? 'BW' : 'WEIGHTED';
       return {
         ...state,
         wizard: {
