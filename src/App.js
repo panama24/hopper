@@ -7,7 +7,6 @@ import TimeForm from './forms/wizard/time';
 import EquipmentForm from './forms/wizard/equipment';
 import FitnessLevelForm from './forms/wizard/level';
 import MovementTypeForm from './forms/wizard/movement';
-import TrainingTypeForm from './forms/wizard/training';
 import { goBack } from './actions';
 
 const mapStateToProps = (state) => {
@@ -36,10 +35,6 @@ const renderWizard = step => {
     case 'equipment':
       return (
         <EquipmentForm />
-      );
-    case 'trainingType':
-      return (
-        <TrainingTypeForm />
       );
     case 'level':
       return (

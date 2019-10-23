@@ -1,4 +1,4 @@
-import { ADD_TIME, ADD_MOVEMENT, ADD_LEVEL, ADD_EQUIPMENT, ADD_TRAINING_TYPE, GO_BACK } from '../constants/action-types';
+import { ADD_TIME, ADD_MOVEMENT, ADD_LEVEL, ADD_EQUIPMENT, GO_BACK } from '../constants/action-types';
 
 const initialStep = 'time';
 const initialState = {
@@ -18,13 +18,10 @@ const initialState = {
         NEXT: 'equipment',
       },
       ADD_EQUIPMENT: {
-        WEIGHTED: 'trainingType',
+        WEIGHTED: 'level',
         BW: 'movement',
       },
       ADD_MOVEMENT: {
-        TYPE: 'trainingType',
-      },
-      ADD_TRAINING_TYPE: {
         TYPE: 'level',
       },
       ADD_LEVEL: {
@@ -103,23 +100,6 @@ const rootReducer = (state = initialState, action) => {
           steps: [
             ...state.wizard.steps,
             state.wizard.wizardState[action.type]['NEXT'],
-          ]
-        },
-      };
-    case ADD_TRAINING_TYPE:
-      return {
-        ...state,
-        wizard: {
-          ...state.wizard,
-          values: {
-            ...state.wizard.values,
-            trainingType: action.payload,
-          },
-          currentStep: state.wizard.wizardState[action.type]['TYPE'],
-          prevStep,
-          steps: [
-            ...state.wizard.steps,
-            state.wizard.wizardState[action.type]['TYPE'],
           ]
         },
       };

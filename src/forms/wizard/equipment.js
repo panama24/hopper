@@ -69,6 +69,17 @@ const EquipmentForm = ({ dispatchAddEquipment }) => {
         <label>
           <input
             type="checkbox"
+            value="all"
+            name="all"
+            key="all"
+            onChange={e => handleChange(e)}
+            checked={checkedItems.get('all')}
+          />
+          All
+        </label>
+        <label>
+          <input
+            type="checkbox"
             value="none"
             name="none"
             key="none"
