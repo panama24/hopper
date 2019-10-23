@@ -13,139 +13,145 @@ const generateWeightedList = arr => {
   return list;
 };
 
+const generateAscLadder = () => { };
+const generateChipper = () => { };
+const generateMaxDistance = () => { };
+const generateMaxReps = () => { };
+const generateClassic = () => { };
+const generateIncentive = () => { };
+const generatePartition = () => { };
+const generateEmom = () => { };
+// if 17 mins choose double tabata
+const generateTabata = () => { };
+const generateFGB = () => { }
+const generateDescLadder = () => { };
+const generateBookEnds = () => { };
+const generateIncMovements = () => { };
+const generateIncReps = () => { };
+const generateAccumDistance = () => { };
+const generateAccumLoad = () => { };
+const generateMixedAccum = () => { };
+const generateRepsForTime = () => { };
+
 const SHORT_AMRAPS = [
-  { name: 'ascLadder', weight: 0.3 },
-  { name: 'chipper', weight: 0.2 },
-  { name: 'maxDistance', weight: 0.1 },
-  { name: 'maxReps', weight: 0.1 },
-  { name: 'shortClassic', weight: 0.5 },
+  { name: 'ascLadder', weight: 0.3, method: generateAscLadder },
+  { name: 'chipper', weight: 0.2, method: generateChipper },
+  { name: 'maxDistance', weight: 0.1, method: generateMaxDistance },
+  { name: 'maxReps', weight: 0.1, method: generateMaxReps },
+  { name: 'classic', weight: 0.5, method: generateClassic },
 ];
-const weightedShortAmraps = generateWeightedList(SHORT_AMRAPS);
 
 const MOD_AMRAPS = [
-  { name: 'ascLadder', weight: 0.2 },
-  { name: 'chipper', weight: 0.2 },
-  { name: 'incentive', weight: 0.05 },
-  { name: 'maxDistance', weight: 0.05 },
-  { name: 'maxReps', weight: 0.05 },
-  { name: 'shortClassic', weight: 0.45 },
+  { name: 'ascLadder', weight: 0.2, method: generateAscLadder },
+  { name: 'chipper', weight: 0.2, method: generateChipper },
+  { name: 'incentive', weight: 0.05, method: generateIncentive },
+  { name: 'maxDistance', weight: 0.05, method: generateMaxDistance },
+  { name: 'maxReps', weight: 0.05, method: generateMaxReps },
+  { name: 'classic', weight: 0.45, method: generateClassic },
 ];
-const weightedModAmraps = generateWeightedList(MOD_AMRAPS);
 
 const LONG_AMRAPS = [
-  { name: 'ascLadder', weight: 0.4 },
-  { name: 'chipper', weight: 0.4 },
-  { name: 'partition', weight: 0.2 },
+  { name: 'ascLadder', weight: 0.4, method: generateAscLadder },
+  { name: 'chipper', weight: 0.4, method: generateChipper },
+  { name: 'partition', weight: 0.2, method: generatePartition },
 ];
-const weightedLongAmraps = generateWeightedList(LONG_AMRAPS);
 
 const SHORT_INTS = [
-  { name: 'emom', weight: 0.8 },
-  { name: 'tabata', weight: 0.2 },
+  { name: 'emom', weight: 0.8, method: generateEmom },
+  { name: 'tabata', weight: 0.2, method: generateTabata },
 ];
-const weightedShortInts = generateWeightedList(SHORT_INTS);
-const weightedShortInts2 = generateWeightedList(SHORT_INTS[0]);
 
 const MOD_INTS = [
-  { name: 'fgb', weight: 0.2 },
-  { name: 'modEmom', weight: 0.5 },
-  { name: 'partition', weight: 0.2 },
-  { name: 'doubleTabata', weight: 0.1 },
+  { name: 'fgb', weight: 0.2, method: generateFGB },
+  { name: 'emom', weight: 0.5, method: generateEmom },
+  { name: 'partition', weight: 0.2, method: generatePartition },
+  { name: 'tabata', weight: 0.1, method: generateTabata },
 ];
-const weightedModInts = generateWeightedList(MOD_INTS);
-const weightedModInts2 = generateWeightedList(MOD_INTS.slice(0, 3));
 
 const LONG_INTS = [
-  { name: 'longEmom', weight: 0.25 },
-  { name: 'partition', weight: 0.5 },
-  { name: 'fgb', weight: 0.25 },
+  { name: 'emom', weight: 0.25, method: generateEmom },
+  { name: 'partition', weight: 0.5, method: generatePartition },
+  { name: 'fgb', weight: 0.25, method: generateFGB },
 ];
-const weightedLongInts = generateWeightedList(LONG_INTS);
 
 const SHORT_ROUNDS = [
-  { name: 'ascLadder', weight: 0.2 },
-  { name: 'chipper', weight: 0.05 },
-  { name: 'classic', weight: 0.5 },
-  { name: 'descLadder', weight: 0.2 },
-  { name: 'incentive', weight: 0.05 },
+  { name: 'ascLadder', weight: 0.2, method: generateAscLadder },
+  { name: 'chipper', weight: 0.05, method: generateChipper },
+  { name: 'classic', weight: 0.5, method: generateClassic },
+  { name: 'descLadder', weight: 0.2, method: generateDescLadder },
+  { name: 'incentive', weight: 0.05, method: generateIncentive },
 ];
-const weightedShortRounds = generateWeightedList(SHORT_ROUNDS);
 
 const MOD_ROUNDS = [
-  { name: 'ascLadder', weight: 0.1 },
-  { name: 'bookEnds', weight: 0.1 },
-  { name: 'chipper', weight: 0.3 },
-  { name: 'classic', weight: 0.3 },
-  { name: 'descLadder', weight: 0.05 },
-  { name: 'incentive', weight: 0.05 },
-  { name: 'partition', weight: 0.05 },
-  { name: 'increasingMovements', weight: 0.05 },
-  { name: 'increasingReps', weight: 0.05 },
+  { name: 'ascLadder', weight: 0.1, method: generateAscLadder },
+  { name: 'bookEnds', weight: 0.1, method: generateBookEnds },
+  { name: 'chipper', weight: 0.3, method: generateChipper },
+  { name: 'classic', weight: 0.3, method: generateClassic },
+  { name: 'descLadder', weight: 0.05, method: generateDescLadder },
+  { name: 'incentive', weight: 0.05, method: generateIncentive },
+  { name: 'partition', weight: 0.05, method: generatePartition },
+  { name: 'increasingMovements', weight: 0.05, method: generateIncMovements },
+  { name: 'increasingReps', weight: 0.05, method: generateIncReps },
 ];
-const weightedModRounds = generateWeightedList(MOD_ROUNDS);
 
 const LONG_ROUNDS = [
-  { name: 'ascLadder', weight: 0.1 },
-  { name: 'bookEnds', weight: 0.1 },
-  { name: 'chipper', weight: 0.3 },
-  { name: 'descLadder', weight: 0.1 },
-  { name: 'incentive', weight: 0.05 },
-  { name: 'partition', weight: 0.1 },
-  { name: 'increasingMovements', weight: 0.15 },
-  { name: 'increasingReps', weight: 0.1 },
+  { name: 'ascLadder', weight: 0.1, method: generateAscLadder },
+  { name: 'bookEnds', weight: 0.1, method: generateBookEnds },
+  { name: 'chipper', weight: 0.3, method: generateChipper },
+  { name: 'descLadder', weight: 0.1, method: generateDescLadder },
+  { name: 'incentive', weight: 0.05, method: generateIncentive },
+  { name: 'partition', weight: 0.1, method: generatePartition },
+  { name: 'increasingMovements', weight: 0.15, method: generateIncMovements },
+  { name: 'increasingReps', weight: 0.1, method: generateIncReps },
 ];
-const weightedLongRounds = generateWeightedList(LONG_ROUNDS);
 
 const SHORT_ACCUM = [
-  { name: 'repsForTime', weight: 0.5 },
-  { name: 'load', weight: 0.25 },
-  { name: 'distance', weight: 0.25 },
+  { name: 'repsForTime', weight: 0.5, method: generateRepsForTime },
+  { name: 'accumLoad', weight: 0.25, method: generateAccumLoad },
+  { name: 'accumDistance', weight: 0.25, method: generateAccumDistance },
 ];
-const weightedShortAccums = generateWeightedList(SHORT_ACCUM);
 
 const MOD_ACCUM = [
-  { name: 'repsForTime', weight: 0.3 },
-  { name: 'load', weight: 0.1 },
-  { name: 'distance', weight: 0.1 },
-  { name: 'mixed', weight: 0.50 },
+  { name: 'repsForTime', weight: 0.3, method: generateRepsForTime },
+  { name: 'accumLoad', weight: 0.1, method: generateAccumLoad },
+  { name: 'accumDistance', weight: 0.1, method: generateAccumDistance },
+  { name: 'mixedAccum', weight: 0.50, method: generateMixedAccum },
 ];
-const weightedModAccums = generateWeightedList(MOD_ACCUM);
 
 const LONG_ACCUM = [
-  { name: 'repsForTime', weight: 0.3 },
-  { name: 'load', weight: 0.1 },
-  { name: 'distance', weight: 0.1 },
-  { name: 'mixed', weight: 0.50 },
+  { name: 'repsForTime', weight: 0.3, method: generateRepsForTime },
+  { name: 'accumLoad', weight: 0.1, method: generateAccumLoad },
+  { name: 'accumDistance', weight: 0.1, method: generateAccumDistance },
+  { name: 'mixedAccum', weight: 0.50, method: generateMixedAccum },
 ];
-const weightedLongAccums = generateWeightedList(LONG_ACCUM);
 
 const WORKOUT_BUILDER = time => ({
   TIME_PRIORITY: {
     SHORT: {
-      AMRAP: weightedShortAmraps,
-      INTERVAL: time === 8 ? weightedShortInts : weightedShortInts2,
+      AMRAP: SHORT_AMRAPS,
+      INTERVAL: time === 8 ? SHORT_INTS : ['emom'],
     },
     MOD: {
-      AMRAP: weightedModAmraps,
-      INTERVAL: time === 17 ? weightedModInts : weightedModInts2,
+      AMRAP: MOD_AMRAPS,
+      INTERVAL: time === 17 ? MOD_INTS : MOD_INTS.slice(0, 3),
     },
     LONG: {
-      AMRAP: weightedLongAmraps,
-      INTERVAL: weightedLongInts,
+      AMRAP: LONG_AMRAPS,
+      INTERVAL: LONG_INTS,
     },
   },
   TASK_PRIORITY: {
     SHORT: {
-      ROUND: weightedShortRounds,
-      ACCUMULATE: weightedShortAccums,
+      ROUND: SHORT_ROUNDS,
+      ACCUMULATE: SHORT_ACCUM,
     },
     MOD: {
-      ROUND: weightedModRounds,
-      ACCUMULATE: weightedModAccums,
+      ROUND: MOD_ROUNDS,
+      ACCUMULATE: MOD_ACCUM,
     },
     LONG: {
-      ROUND: weightedLongRounds,
-      ACCUMULATE: weightedLongAccums,
+      ROUND: LONG_ROUNDS,
+      ACCUMULATE: LONG_ACCUM,
     },
   },
 });
@@ -166,9 +172,10 @@ const getFormat = time => {
   const duration = getDuration(time);
   const keys = Object.keys(WORKOUT_BUILDER(time));
   const formats = WORKOUT_BUILDER(time)[random(keys)][duration];
-  const randomformat = formats[random(Object.keys(formats))];
+  const subformats = formats[random(Object.keys(formats))];
+  const weightedList = generateWeightedList(subformats);
 
-  return random(randomformat);
+  return subformats.filter(key => key.name === random(weightedList))[0];
 };
 
 export {
