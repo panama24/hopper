@@ -53,7 +53,7 @@ const App = (props) => {
   const backTrackable = prevStep && steps.length > 1 && currentStep !== 'createWorkout';
 
   const subformat = values.time && getFormat(values.time);
-  // console.log(subformat);
+  console.log(subformat);
 
   return (
     <Layout>
