@@ -93,7 +93,7 @@ const rootReducer = (state = initialState, action) => {
           ...state.wizard,
           values: {
             ...state.wizard.values,
-            time: action.payload,
+            time: Number(action.payload),
           },
           currentStep: state.wizard.wizardState[action.type]['NEXT'],
           prevStep,

@@ -1,68 +1,74 @@
 // step func() -> increment by 5, 10, 20
-/*
-  AMRAP: {
-    LADDER: ['asc', 'desc'],
-    MAX: ['reps', 'rounds'],
-    CLASSIC: ['21-15-9', '9-6-3', '3-6-9'],
-    INCENTIVE: ['buyIn', 'cashOut'],
-  }
-  INTERVAL: {
-    TABATA: [],
-    FGB: [],
-    EMOM: ['repsPlusMax', 'alternating'],
-  }
 
-  ROUNDS: {
-    LADDER: ['asc', 'desc', 'bookEnds'],
-    CLASSIC: ['21-15-9', '9-6-3', '3-6-9', '5-7-9', '9-7-5'],
-    INCENTIVE: ['buyIn', 'cashOut'],
-    CHIPPER: ['asc', 'desc', 'constant', 'random'],
+const random = arr => arr[Math.floor(Math.random() * arr.length)];
+
+const SHORT_AMRAPS = ['ascLadder', 'maxDistance', 'maxReps', 'shortClassic', 'chipper'];
+const MOD_AMRAPS = ['ascLadder', 'maxDistance', 'maxReps', 'classic', 'incentive', 'chipper'];
+const LONG_AMRAPS = ['ascLadder', 'incentive', 'chipper', 'partition'];
+
+const SHORT_INTS = ['emom', 'tabata'];
+const MOD_INTS = ['fgb', 'modEmom', 'partition', 'doubleTabata'];
+const LONG_INTS = ['longEmom', 'partition', 'fgb'];
+
+const SHORT_ROUNDS = ['ascLadder', 'descLadder', 'classic', 'incentive', 'chipper'];
+const MOD_ROUNDS = ['ascLadder', 'descLadder', 'bookEnds', 'classic', 'incentive', 'chipper', 'partition', 'increasingMovements', 'increasingReps'];
+const LONG_ROUNDS = ['ascLadder', 'descLadder', 'bookEnds', 'incentive', 'chipper', 'partition'];
+
+const SHORT_ACCUM = ['repsForTime', 'load', 'distance'];
+const MOD_ACCUM = ['repsForTime', 'load', 'distance', 'mixed'];
+const LONG_ACCUM = ['repsForTime', 'load', 'distance', 'mixed'];
+
+const WORKOUT_BUILDER = time => ({
+  TIME_PRIORITY: {
+    SHORT: {
+      AMRAP: SHORT_AMRAPS,
+      INTERVAL: time === 8 ? SHORT_INTS : SHORT_INTS[0],
+    },
+    MOD: {
+      AMRAP: MOD_AMRAPS,
+      INTERVAL: time === 17 ? MOD_INTS : MOD_INTS.slice(0, 3),
+    },
+    LONG: {
+      AMRAP: LONG_AMRAPS,
+      INTERVAL: LONG_INTS,
+    },
   },
-*/
+  TASK_PRIORITY: {
+    SHORT: {
+      ROUND: SHORT_ROUNDS,
+      ACCUMULATE: SHORT_ACCUM,
+    },
+    MOD: {
+      ROUND: MOD_ROUNDS,
+      ACCUMULATE: MOD_ACCUM,
+    },
+    LONG: {
+      ROUND: LONG_ROUNDS,
+      ACCUMULATE: LONG_ACCUM,
+    },
+  },
+});
 
-// also return number of emoms that fit in time domain
-// maybe should include fgb + variations thereof
-const modEmom = (time) => {
-  // divisible by 1,2,3,5,7?
+const getDuration = time => {
+  if (time >= 5 && time < 16) {
+    return 'SHORT';
+  } else if (time >= 16 && time < 31) {
+    return 'MOD';
+  } else if (time >= 31) {
+    return 'LONG';
+  } else {
+    return 'no time given';
+  }
 };
 
-const tabata = () => {
-  // returns if should be same movements or alternating, etc.
-}
-
-const WORKOUT_FORMAT_MAP = {
-  SHORT: {
-    TIME_PRIORITY: {
-      AMRAP: ['ascLadder', 'maxDistance', 'maxReps', 'classic', 'incentive', 'chipper'],
-      // calculate how many rounds fits in time? how many minutes?
-      INTERVAL: ['tabata', 'emom'],
-    },
-    TASK_PRIORITY: {
-      ROUND: ['ascLadder', 'descLadder', 'classic', 'incentive', 'chipper'],
-      // 30 reps for time, accumulate 1000#, row 100cal
-      ACCUMULATE: ['repsForTime', 'load', 'distance'],
-    },
-  },
-  MODERATE: {
-    TIME_PRIORITY: {
-      AMRAP: ['ascLadder', 'maxDistance', 'maxReps', 'classic', 'incentive', 'chipper'],
-      INTERVAL: ['fgb', 'modEmom', 'partition'],
-    },
-    TASK_PRIORITY: {
-      ROUND: ['ascLadder', 'descLadder', 'bookEnds', 'classic', 'incentive', 'chipper', 'partition', 'increasingMovements', 'increasingReps'],
-      ACCUMULATE: ['repsForTime', 'load', 'distance', 'mixed'],
-    },
-  },
-  LONG: {
-    TIME_PRIORITY: {
-      AMRAP: ['ascLadder', 'incentive', 'chipper', 'partition'],
-      INTERVAL: ['longEmom', 'partition', 'fgb'],
-    },
-    TASK_PRIORITY: {
-      ROUND: ['ascLadder', 'descLadder', 'bookEnds', 'incentive', 'chipper', 'partition'],
-      ACCUMULATE: ['repsForTime', 'load', 'distance', 'mixed'],
-    },
-  },
+const getFormat = time => {
+  const duration = getDuration(time);
+  const keys = Object.keys(WORKOUT_BUILDER(time));
+  const formats = WORKOUT_BUILDER(time)[random(keys)][duration];
+  console.log('formats', formats)
+  return formats[random(Object.keys(formats))];
 };
-//                        [DURATION][PRIORITY][SUB_FORMAT][REP_SCHEME]
-export default WORKOUT_FORMAT_MAP;
+
+export {
+  getFormat,
+};

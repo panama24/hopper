@@ -7,6 +7,7 @@ import TimeForm from './forms/wizard/time';
 import EquipmentForm from './forms/wizard/equipment';
 import FitnessLevelForm from './forms/wizard/level';
 import MovementTypeForm from './forms/wizard/movement';
+import { getFormat } from './data';
 import { goBack } from './actions';
 
 const mapStateToProps = (state) => {
@@ -48,9 +49,12 @@ const renderWizard = step => {
 }
 
 const App = (props) => {
-  console.log(props.wizard)
-  const { dispatchGoBack, wizard: { currentStep, prevStep, steps } } = props;
+  const { dispatchGoBack, wizard: { currentStep, prevStep, steps, values } } = props;
   const backTrackable = prevStep && steps.length > 1 && currentStep !== 'createWorkout';
+
+  const subformat = values.time && getFormat(values.time);
+  // console.log(subformat);
+
   return (
     <Layout>
       <Wrapper>
