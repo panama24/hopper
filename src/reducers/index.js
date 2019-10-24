@@ -11,7 +11,6 @@ const initialState = {
       equipment: null,
       movement: null,
       level: null,
-      trainingType: null,
     },
     wizardState: {
       ADD_TIME: {
@@ -35,14 +34,14 @@ const rootReducer = (state = initialState, action) => {
   const prevStep = state.wizard.steps.length > 0 ? state.wizard.steps[state.wizard.steps.length - 1] : null;
   switch (action.type) {
     case ADD_EQUIPMENT:
-      const key = action.payload === 'none' ? 'BW' : 'WEIGHTED';
+      const key = action.payload.includes('NONE') ? 'BW' : 'WEIGHTED';
       return {
         ...state,
         wizard: {
           ...state.wizard,
           values: {
             ...state.wizard.values,
-            equipment: action.payload,
+            equipment: action.payload.includes('NONE') ? ['BW'] : action.payload.concat(['BW']),
           },
           currentStep: state.wizard.wizardState[action.type][key],
           prevStep,

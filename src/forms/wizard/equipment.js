@@ -25,66 +25,55 @@ const EquipmentForm = ({ dispatchAddEquipment }) => {
         <label>
           <input
             type="checkbox"
-            value="dumbbell"
-            name="dumbbell"
-            key="dumbbell"
+            value="DUMBBELL"
+            name="DUMBBELL"
+            key="DUMBBELL"
             onChange={e => handleChange(e)}
-            checked={checkedItems.get('dumbbell')}
+            checked={checkedItems.get('DUMBBELL')}
           />
           Dumbbell
         </label>
         <label>
           <input
             type="checkbox"
-            value="barbell"
-            name="barbell"
-            key="barbell"
+            value="BARBELL"
+            name="BARBELL"
+            key="BARBELL"
             onChange={e => handleChange(e)}
-            checked={checkedItems.get('barbell')}
+            checked={checkedItems.get('BARBELL')}
           />
           Barbell
         </label>
         <label>
           <input
             type="checkbox"
-            value="kettlebell"
-            name="kettlebell"
-            key="kettlebell"
+            value="KETTLEBELL"
+            name="KETTLEBELL"
+            key="KETTLEBELL"
             onChange={e => handleChange(e)}
-            checked={checkedItems.get('kettlebell')}
+            checked={checkedItems.get('KETTLEBELL')}
           />
           Kettlebell
         </label>
         <label>
           <input
             type="checkbox"
-            value="oddObject"
-            name="oddObject"
-            key="oddObject"
+            value="ODD_OBJECT"
+            name="ODD_OBJECT"
+            key="ODD_OBJECT"
             onChange={e => handleChange(e)}
-            checked={checkedItems.get('oddObject')}
+            checked={checkedItems.get('ODD_OBJECT')}
           />
           Odd Object
         </label>
         <label>
           <input
             type="checkbox"
-            value="all"
-            name="all"
-            key="all"
+            value="NONE"
+            name="NONE"
+            key="NONE"
             onChange={e => handleChange(e)}
-            checked={checkedItems.get('all')}
-          />
-          All
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="none"
-            name="none"
-            key="none"
-            onChange={e => handleChange(e)}
-            checked={checkedItems.get('none')}
+            checked={checkedItems.get('NONE')}
           />
           None
         </label>
