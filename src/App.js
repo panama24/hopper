@@ -8,7 +8,6 @@ import EquipmentForm from './forms/wizard/equipment';
 import FitnessLevelForm from './forms/wizard/level';
 import MovementTypeForm from './forms/wizard/movement';
 import { goBack } from './actions';
-import { generateAscLadder } from './data';
 
 const mapStateToProps = (state) => {
   return {
@@ -52,7 +51,6 @@ const App = (props) => {
   const { dispatchGoBack, wizard: { currentStep, prevStep, steps } } = props;
   const backTrackable = prevStep && steps.length > 1 && currentStep !== 'createWorkout';
 
-  console.log(generateAscLadder('SHORT', ['BARBELL', 'BW']))
   return (
     <Layout>
       <Wrapper>

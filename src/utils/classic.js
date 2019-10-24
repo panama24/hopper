@@ -1,0 +1,5 @@
+const generateClassic = () => { };
+
+export {
+  generateClassic,
+};

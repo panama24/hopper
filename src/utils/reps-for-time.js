@@ -1,0 +1,6 @@
+
+const generateRepsForTime = () => { };
+
+export {
+  generateRepsForTime,
+};

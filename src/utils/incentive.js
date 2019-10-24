@@ -1,0 +1,5 @@
+const generateIncentive = () => { };
+
+export {
+  generateIncentive,
+};
